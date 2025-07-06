@@ -99,7 +99,13 @@ def generate_report(ip, open_ports, vulns):
 
 # --- MAIN ---
 if __name__ == "__main__":
-    target_ip = input("Enter target IP address: ").strip()
+    import sys
+    if len(sys.argv) != 2:
+    print("Usage: python scanner.py <target_ip>")
+    sys.exit(1)
+
+    target_ip = sys.argv[1]
+
     scanned_services = scan_target(target_ip)
     vulnerabilities = check_vulnerabilities(scanned_services)
     generate_report(target_ip, scanned_services, vulnerabilities)
